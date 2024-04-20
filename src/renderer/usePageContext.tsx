@@ -3,24 +3,24 @@
 
 import { ComponentChildren, createContext } from "preact";
 import { useContext } from "preact/hooks";
-import { PageContext } from "vike/types";
+import { VikeContext } from "../types";
 
 export { PageContextProvider };
 export { usePageContext };
 
-const Context = createContext<PageContext>(undefined as unknown as PageContext);
+const Context = createContext<VikeContext>(undefined as unknown as VikeContext);
 
 const PageContextProvider = function ({
-  pageContext,
-  children,
+	pageContext,
+	children,
 }: {
-  pageContext: PageContext;
-  children: ComponentChildren | null;
+	pageContext: VikeContext;
+	children: ComponentChildren | null;
 }) {
-  return <Context.Provider value={pageContext}>{children}</Context.Provider>;
+	return <Context.Provider value={pageContext}>{children}</Context.Provider>;
 };
 
 function usePageContext() {
-  const pageContext = useContext(Context);
-  return pageContext;
+	const pageContext = useContext(Context);
+	return pageContext;
 }

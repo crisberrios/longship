@@ -1,39 +1,28 @@
-export default Wrapper;
-
-import { PageContext } from "vike/types";
+export default Page;
 import { usePageContext } from "../../renderer/usePageContext";
-import { Suspense } from "preact/compat";
+import { SuspenseExampleData } from "./+data";
+import { fact$ } from "../../store/store";
+import { VikeContext, WithData } from "../../types";
 
 function Page() {
-  const { renderSource, data } = usePageContext() as WithData<
-    PageContext,
-    { fact: string }
-  >;
+	const { data } = usePageContext() as WithData<
+		VikeContext,
+		SuspenseExampleData
+	>;
+	if (typeof data === "function") {
+		data().then((d) => (fact$.value = d.fact));
+	} else fact$.value = data.fact as string;
 
-  return (
-    <>
-      <h1>About</h1>
-      <p>Demo using Vike.</p>
-      <p>
-        Render Source: {renderSource ?? "client"}{" "}
-        <span style={{ fontWeight: "bold" }}>
-          This data comes from entry-server.ts {">"} pageContextInit
-        </span>
-      </p>
-      <p>
-        {data.fact}{" "}
-        <span style={{ fontWeight: "bold" }}>This data comes from an API</span>
-      </p>
-    </>
-  );
+	return fact$.value !== "" ? (
+		<>
+			<h1>About</h1>
+			<p>Demo using Vike.</p>
+			<p>
+				{fact$}
+				<span style={{ fontWeight: "bold" }}>This data comes from an API</span>
+			</p>
+		</>
+	) : (
+		<div>Loading...</div>
+	);
 }
-
-function Wrapper() {
-  return (
-    <Suspense fallback={<div>Loading</div>}>
-      <Page />
-    </Suspense>
-  );
-}
-
-type WithData<T, R> = T & { data: R };

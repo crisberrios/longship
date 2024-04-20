@@ -1,6 +1,8 @@
 export { data };
 
 async function data() {
-  const catFact = await (await fetch("https://catfact.ninja/fact")).json();
-  return catFact;
+	const catFact = await fetch("https://catfact.ninja/fact").then((res) =>
+		res.json(),
+	);
+	return catFact;
 }
