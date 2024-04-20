@@ -55,5 +55,5 @@ export default {
 		},
 	},
 	hydrationCanBeAborted: true,
-	passToClient: ["title", "description"],
+	passToClient: ["title", "description", "initialStore"],
 } satisfies Config;
