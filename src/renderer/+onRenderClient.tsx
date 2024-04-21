@@ -7,7 +7,8 @@ import { OnRenderClientAsync } from "vike/types";
 import { getPageTitle } from "./getPageTitle";
 import { getPageDescription } from "./getPageDescription";
 import { VikeContext } from "../types";
-import { hydrateStore, store } from "../store/store";
+import { hydrateStore } from "../store/store";
+import store from "../store/index.store";
 
 async function onRenderClient(
 	pageContext: VikeContext,

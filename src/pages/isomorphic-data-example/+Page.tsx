@@ -1,8 +1,9 @@
+import store from "../../store/index.store";
+
 export default Page;
-import { store } from "../../store/store";
 
 function Page() {
-	return store.fact$.value !== "" ? (
+	return store.catFacts.fact.value !== "" ? (
 		<>
 			<h1>Isomorphic data fetch</h1>
 			<p>
@@ -11,7 +12,7 @@ function Page() {
 				navigation will load the data in an async fashion
 			</p>
 			<h2>Cat Fact</h2>
-			<p>{store.fact$}</p>
+			<p>{store.catFacts.fact}</p>
 		</>
 	) : (
 		<div>Loading...</div>

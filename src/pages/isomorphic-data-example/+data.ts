@@ -8,7 +8,7 @@ export interface ICatFacts {
 
 function load(): DataLoader<ICatFacts> {
 	const catFactPromise = fetch("https://catfact.ninja/fact")
-		.then((res: Response) => sleep(1000, res))
+		.then((res: Response) => sleep(300, res))
 		.then((res: Response) => res.json());
 
 	return new DataLoader(catFactPromise);

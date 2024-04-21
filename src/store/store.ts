@@ -1,5 +1,19 @@
 import { Signal, signal } from "@preact/signals";
 
+export { createStore, hydrateStore };
+
+type Primitive = string | number | boolean | null;
+type CanSerialize = Primitive | Primitive[] | SerializableObject;
+export type SerializableObject = { [k: string]: CanSerialize };
+
+type Signalize<T extends SerializableObject> = {
+	[P in keyof T]: T[P] extends Primitive | Primitive[]
+		? Signal<T[P]>
+		: T[P] extends SerializableObject
+			? Signalize<T[P]>
+			: never;
+};
+
 function createStore<T extends { [k: string]: CanSerialize }>(
 	initialState: T,
 ): Signalize<T> {
@@ -9,32 +23,11 @@ function createStore<T extends { [k: string]: CanSerialize }>(
 		if (isSerializableObject(stateValue)) {
 			store[key as string] = createStore(stateValue);
 		} else {
-			store[`${key}$`] = signal(initialState[key]);
+			store[key] = signal(initialState[key]);
 		}
 	}
 	return store as Signalize<T>;
 }
-
-const store = createStore({
-	fact: "",
-	inner: { counter: 0, catNames: ["A", "B"] },
-});
-
-export { createStore, store, hydrateStore };
-
-type Primitive = string | number | boolean | null;
-type CanSerialize = Primitive | Primitive[] | SerializableObject;
-type SerializableObject = { [k: string]: CanSerialize };
-
-type Signalize<T extends SerializableObject> = {
-	[P in keyof T as `${P & string}${T[P] extends SerializableObject
-		? ``
-		: `$`}`]: T[P] extends Primitive | Primitive[]
-		? Signal<T[P]>
-		: T[P] extends SerializableObject
-			? Signalize<T[P]>
-			: never;
-};
 
 function hydrateStore<T extends SerializableObject>(
 	store: Signalize<T>,
@@ -48,8 +41,7 @@ function hydrateStore<T extends SerializableObject>(
 			] as Signalize<T[Extract<keyof T, string>] & SerializableObject>; // Add type assertion to ensure correct type
 			hydrateStore(storeValue, stateValue);
 		} else {
-			(store as Record<string, SerializableObject>)[`${key}$`].value =
-				state[key];
+			(store as Record<string, SerializableObject>)[key].value = state[key];
 		}
 	}
 }
