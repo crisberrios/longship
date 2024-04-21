@@ -4,12 +4,14 @@ import { store } from "../../store/store";
 function Page() {
 	return store.fact$.value !== "" ? (
 		<>
-			<h1>About</h1>
-			<p>Demo using Vike.</p>
+			<h1>Isomorphic data fetch</h1>
 			<p>
-				<span>Cat Fact:</span> <span>{store.fact$}</span>
-				<span style={{ fontWeight: "bold" }}>This data comes from an API</span>
+				This page highlights the use of isomorphic, async data fetch. Data will
+				be pre-fetched and pre-rendered on initial load, but clientside
+				navigation will load the data in an async fashion
 			</p>
+			<h2>Cat Fact</h2>
+			<p>{store.fact$}</p>
 		</>
 	) : (
 		<div>Loading...</div>

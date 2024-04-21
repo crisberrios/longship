@@ -7,14 +7,14 @@ import { OnRenderClientAsync } from "vike/types";
 import { getPageTitle } from "./getPageTitle";
 import { getPageDescription } from "./getPageDescription";
 import { VikeContext } from "../types";
-import { hydrateStore } from "../store/store";
+import { hydrateStore, store } from "../store/store";
 
 async function onRenderClient(
 	pageContext: VikeContext,
 ): ReturnType<OnRenderClientAsync> {
 	const { Page } = pageContext;
 	if (pageContext.isHydration) {
-		hydrateStore(pageContext.initialStore);
+		hydrateStore(store, pageContext.initialStore);
 	}
 	const page = (
 		<PageShell pageContext={pageContext}>
