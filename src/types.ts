@@ -10,4 +10,15 @@ export interface VikeContext<TData = undefined> {
 	isClientSideNavigation: boolean;
 	isHydration: boolean;
 	initialStore: Partial<TInitialData>;
+	urlPathname: string;
+	url: string;
+	routeParams: object;
+	pageExports: object;
+	exports: object;
+	configEntries: object;
+	exportsAll: object;
+	abortReason: string | null;
+	isBackwardNavigation: boolean;
+	urlOriginal: string;
+	urlParsed: object;
 }

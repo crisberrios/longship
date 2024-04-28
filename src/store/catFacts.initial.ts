@@ -5,4 +5,9 @@ const initialCatFacts = {
 	length: 0,
 };
 
+export type CatFact = {
+	fact: string;
+	length: number;
+};
+
 export { initialCatFacts };

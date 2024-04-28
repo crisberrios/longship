@@ -46,6 +46,18 @@ async function startServer() {
 
 	const router = createRouter();
 
+	router.get(
+		"/api/cat-names",
+		eventHandler(async () => {
+			const randomCatName = () => {
+				const catNames = ["Whiskers", "Fluffy", "Mittens", "Snowball"];
+				const randomIndex = Math.floor(Math.random() * catNames.length);
+				return catNames[randomIndex];
+			};
+			return new Promise((resolve) => resolve(randomCatName()));
+		}),
+	);
+
 	router.use(
 		"/**",
 		eventHandler(async (event) => {

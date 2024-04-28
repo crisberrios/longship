@@ -1,23 +1,21 @@
 import { Signal, signal } from "@preact/signals";
 
 export { createStore, hydrateStore };
+export type SignalTypes = Primitive | Primitive[] | unknown[];
 
 type Primitive = string | number | boolean | null;
-type CanSerialize = Primitive | Primitive[] | SerializableObject;
-export type SerializableObject = { [k: string]: CanSerialize };
-
-type Signalize<T extends SerializableObject> = {
-	[P in keyof T]: T[P] extends Primitive | Primitive[]
+type IsObject = Record<string, unknown>;
+export type TrustedObject = Record<string, unknown>;
+type Signalize<T extends IsObject> = {
+	[P in keyof T]: T[P] extends SignalTypes
 		? Signal<T[P]>
-		: T[P] extends SerializableObject
+		: T[P] extends IsObject | TrustedObject
 			? Signalize<T[P]>
 			: never;
 };
 
-function createStore<T extends { [k: string]: CanSerialize }>(
-	initialState: T,
-): Signalize<T> {
-	const store = {} as { [key: string]: unknown }; // Change the type of store
+function createStore<T extends IsObject>(initialState: T): Signalize<T> {
+	const store = {} as IsObject;
 	for (const key in initialState) {
 		const stateValue = initialState[key];
 		if (isSerializableObject(stateValue)) {
@@ -29,26 +27,26 @@ function createStore<T extends { [k: string]: CanSerialize }>(
 	return store as Signalize<T>;
 }
 
-function hydrateStore<T extends SerializableObject>(
-	store: Signalize<T>,
-	state: T,
-) {
+function hydrateStore<T extends TrustedObject>(store: Signalize<T>, state: T) {
 	for (const key in state) {
 		const stateValue = state[key];
 		if (isSerializableObject(stateValue)) {
-			const storeValue = (store as Record<string, SerializableObject>)[
-				key
-			] as Signalize<T[Extract<keyof T, string>] & SerializableObject>; // Add type assertion to ensure correct type
+			const storeValue = store[key] as Signalize<
+				T[Extract<keyof T, string>] & IsObject
+			>;
 			hydrateStore(storeValue, stateValue);
 		} else {
-			(store as Record<string, SerializableObject>)[key].value = state[key];
+			if (store[key]?.value === undefined) {
+				continue;
+			}
+			store[key].value = state[key];
 		}
 	}
 }
 
 function isSerializableObject(
 	value: unknown | Signal<unknown>,
-): value is SerializableObject {
+): value is IsObject {
 	return (
 		(value as Signal).brand === undefined &&
 		typeof value === "object" &&
