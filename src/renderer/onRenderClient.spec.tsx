@@ -2,9 +2,10 @@
 import { render } from "@testing-library/preact";
 import onRenderClient from "./+onRenderClient";
 import { PageContextClient, Url } from "vike/types";
+import { VikeContext } from "../types";
 describe("onRenderClient", () => {
 	it("renders without crashing", () => {
-		const samplePageContext: PageContextClient = {
+		const samplePageContext: VikeContext = {
 			url: "/some/url",
 			routeParams: {},
 			isHydration: false,
@@ -15,11 +16,13 @@ describe("onRenderClient", () => {
 			exports: {},
 			exportsAll: {},
 			abortReason: null, // Add a value for abortReason
-			data: {}, // Add a value for data
+			data: undefined,
 			isBackwardNavigation: false,
 			urlOriginal: "/some/url",
 			urlParsed: { pathname: "/some/url", search: {}, hash: "" } as Url,
 			urlPathname: "/some/url",
+			initialStore: {},
+			isClientSideNavigation: false,
 		};
 
 		render(onRenderClient(samplePageContext));

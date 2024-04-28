@@ -9,6 +9,7 @@ import { getPageDescription } from "./getPageDescription";
 import { VikeContext } from "../types";
 import { hydrateStore } from "../store/store";
 import store from "../store/index.store";
+import "./index.css"
 
 async function onRenderClient(
 	pageContext: VikeContext,
