@@ -1,3 +1,3 @@
 # longship
 
-Sails-included starter based on H3, Preact, Tailwind CSS and Vike. Pre-configured for Node.js, Github Actions and Fly.io.
+Sails-included starter based on H3, React, Mantine and Vike. Pre-configured for Node.js, GitHub Actions and Fly.io.

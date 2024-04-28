@@ -1,3 +1,4 @@
+import React from "react";
 export default Page;
 
 import { Counter } from "./Counter";

@@ -1,8 +1,10 @@
 export default Page;
 
+import React from "react";
 import { PageContext } from "vike/types";
-import { usePageContext } from "../../renderer/usePageContext";
+
 import "./code.css";
+import { usePageContext } from "vike-react/usePageContext";
 
 function Page() {
 	const { data, isClientSideNavigation } = usePageContext() as WithData<

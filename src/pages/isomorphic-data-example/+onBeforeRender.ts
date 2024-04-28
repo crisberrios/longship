@@ -11,12 +11,8 @@ function isDataLoader<T>(value: TDataLoader<T> | T): value is TDataLoader<T> {
 }
 
 async function onBeforeRender(pageContext: VikeContext<IsomorphicExampleData>) {
-	if (pageContext.isHydration) {
-		hydrateStore(store, pageContext.initialStore);
-		return;
-	}
 	const { data } = pageContext;
-
+	store.isInitialized.value = true;
 	isDataLoader(data.catFacts) &&
 		data.catFacts.data().then((catFact) => {
 			store.catFacts.fact.value = catFact.fact;

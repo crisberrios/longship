@@ -1,8 +1,23 @@
-import type { Config } from "vike/types";
+export { config };
 
-// https://vike.dev/config
-export default {
-	// https://vike.dev/clientRouting
+import type { Config } from "vike/types";
+import { LayoutDefault } from "../layouts/LayoutDefault";
+import { HeadDefault } from "../layouts/HeadDefault";
+import vikeReact from "vike-react/config";
+
+// Default configs (can be overridden by pages)
+const config = {
+	// <title>
+	title: "My Vike + React App",
+	Head: HeadDefault,
+	// https://vike.dev/Layout
+	Layout: LayoutDefault,
+	// https://vike.dev/stream
+	stream: true,
+	// https://vike.dev/ssr - this line can be removed since `true` is the default
+	ssr: true,
+	// https://vike.dev/extends
+	extends: vikeReact,
 	clientRouting: true,
 	// https://vike.dev/meta
 	meta: {
@@ -55,5 +70,5 @@ export default {
 		},
 	},
 	hydrationCanBeAborted: true,
-	passToClient: ["title", "description", "initialStore"],
+	passToClient: ["title", "description", "initialStore", "isHydration"],
 } satisfies Config;
