@@ -47,7 +47,7 @@ async function startServer() {
 	const router = createRouter();
 
 	router.get(
-		"/api/cat-names",
+		"/api/cat-name",
 		eventHandler(async () => {
 			const randomCatName = () => {
 				const catNames = ["Whiskers", "Fluffy", "Mittens", "Snowball"];

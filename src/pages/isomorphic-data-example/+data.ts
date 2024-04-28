@@ -1,23 +1,35 @@
-import { isomorphicData } from "../../dataLoading/isomorphicData";
 import { DataLoader } from "../../dataLoading/dataLoader";
+import { CatFact } from "../../store/catFacts.initial";
+import { VikeContext } from "../../types";
 
-export interface ICatFacts {
-	fact: string;
-	length: number;
+export interface IsomorphicExampleData {
+	catFacts: DataLoader<CatFact> | CatFact;
+	catName: DataLoader<string> | string;
 }
 
-function load(): DataLoader<ICatFacts> {
-	const catFactPromise = fetch("https://catfact.ninja/fact")
-		.then((res: Response) => sleep(300, res))
-		.then((res: Response) => res.json());
+async function data(pageContext: VikeContext): Promise<IsomorphicExampleData> {
+	let baseUrl = "";
 
-	return new DataLoader(catFactPromise);
+	if (!pageContext.isClientSideNavigation) {
+		baseUrl = "http://localhost:3000";
+	}
+
+	const catFactPromise = fetch("https://catfact.ninja/fact").then(
+		(res: Response) => res.json(),
+	);
+
+	const catNamePromise = fetch(`${baseUrl}/api/cat-name`).then(
+		(res: Response) => res.text(),
+	);
+
+	return {
+		catFacts: pageContext.isClientSideNavigation
+			? new DataLoader(catFactPromise)
+			: await catFactPromise,
+		catName: pageContext.isClientSideNavigation
+			? new DataLoader(catNamePromise)
+			: await catNamePromise,
+	};
 }
-
-function sleep(ms: number, res: Response) {
-	return new Promise<Response>((resolve) => setTimeout(() => resolve(res), ms));
-}
-
-const data = isomorphicData(load);
 
 export { data };

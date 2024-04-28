@@ -13,6 +13,8 @@ function Page() {
 			</p>
 			<h2>Cat Fact</h2>
 			<p>{store.catFacts.fact}</p>
+			<h2>Random Cat Name</h2>
+			<p>{store.catFacts.catName}</p>
 		</>
 	) : (
 		<div>Loading...</div>
