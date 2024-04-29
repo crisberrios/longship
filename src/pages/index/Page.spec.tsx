@@ -1,12 +1,16 @@
 // Import the necessary modules
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { test } from "vitest";
 import Page from "./+Page";
+import { MantineProvider } from "@mantine/core";
 
 // Define the test
 test("renders Page component", () => {
-	render(<Page />);
+	render(
+		<MantineProvider>
+			<Page />
+		</MantineProvider>,
+	);
 
 	// Check if the "Welcome" header is present
 	const headerElement = screen.getByText(/Welcome/i);

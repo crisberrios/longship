@@ -75,7 +75,8 @@
 			"**/dist",
 			"**/node_modules",
 			"**/coverage",
-			"**/package-lock.json"
+			"**/package-lock.json",
+			"**/vitest.setup.mjs"
 		]
 	},
 	"javascript": { "globals": [] },

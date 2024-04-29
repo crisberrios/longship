@@ -1,6 +1,5 @@
 export default Page;
 
-import React from "react";
 import { PageContext } from "vike/types";
 
 import "./code.css";

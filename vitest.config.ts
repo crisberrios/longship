@@ -7,5 +7,6 @@ export default defineConfig({
 		include: ["**/*.spec.tsx"],
 		globals: true,
 		environment: "jsdom",
+		setupFiles: "./vitest.setup.mjs",
 	},
 });

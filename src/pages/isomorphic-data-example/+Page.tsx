@@ -1,4 +1,3 @@
-import React from "react";
 import store, { TInitialData } from "../../store/index.store";
 import { usePageContext } from "vike-react/usePageContext";
 import { hydrateStore } from "../../store/store";
