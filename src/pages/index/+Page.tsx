@@ -1,19 +1,15 @@
 export default Page;
 
-import { Box } from "@mantine/core";
-import { Counter } from "./Counter";
+import { MainPageHero } from "../../components/hero/MainPageHero";
+import { MainPageFeatures } from "../../components/features/MainPageFeatures";
+import { MainPageFooter } from "../../components/footer/MainPageFooter";
 
 function Page() {
 	return (
-		<Box>
-			<h1>Welcome</h1>
-			This page is:
-			<ul>
-				<li>Rendered to HTML.</li>
-				<li>
-					Interactive. <Counter />
-				</li>
-			</ul>
-		</Box>
+		<>
+			<MainPageHero />
+			<MainPageFeatures />
+			<MainPageFooter />
+		</>
 	);
 }
