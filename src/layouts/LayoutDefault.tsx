@@ -1,11 +1,5 @@
 export { LayoutDefault };
-import {
-	Container,
-	MantineTheme,
-	createTheme,
-	rem,
-	virtualColor,
-} from "@mantine/core";
+import { Container, createTheme, rem } from "@mantine/core";
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { HeaderMegaMenu } from "../components/header/HeaderMegaMenu";

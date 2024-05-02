@@ -3,6 +3,7 @@
 import { createServer } from "node:http";
 import { join } from "pathe";
 import {
+	App,
 	createApp,
 	createRouter,
 	eventHandler,
@@ -26,7 +27,10 @@ async function startServer() {
 		app.use(
 			fromNodeMiddleware(
 				sirv(clientPath, {
-					gzip: true,
+					brotli: true,
+					maxAge: 31536000, // 1Y
+					immutable: true,
+					etag: true,
 				}),
 			),
 		);

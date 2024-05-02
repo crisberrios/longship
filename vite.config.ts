@@ -1,8 +1,10 @@
 import vike from "vike/plugin";
 import react from "@vitejs/plugin-react";
+import compression from "vite-plugin-compression2";
 
 const config = {
 	plugins: [
+		compression({ algorithm: "brotliCompress"}),
 		react(),
 		vike({
 			disableAutoFullBuild: true,
@@ -13,7 +15,6 @@ const config = {
 				if (!env.isSsrBuild) return;
 				return {
 					build: {
-						target: "node18",
 						rollupOptions: {
 							input: {
 								"entry-server": "./src/server/entry-server.ts",
