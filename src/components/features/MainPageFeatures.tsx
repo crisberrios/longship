@@ -48,7 +48,7 @@ export function MainPageFeatures() {
 			<Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
 				{feature.title}
 			</Text>
-			<Text fz="sm" c="dimmed" mt="sm">
+			<Text fz="sm" c="dark.3" mt="sm">
 				{feature.description}
 			</Text>
 		</Card>

@@ -6,6 +6,7 @@ import { HeaderMegaMenu } from "../components/header/HeaderMegaMenu";
 import "@mantine/core/styles.css";
 
 const theme = createTheme({
+	autoContrast: true,
 	primaryColor: "deepBlue",
 	colors: {
 		// Add your color

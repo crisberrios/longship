@@ -83,7 +83,7 @@ export function HeaderMegaMenu() {
 					<Text size="sm" fw={500}>
 						{item.title}
 					</Text>
-					<Text size="xs" c="dimmed">
+					<Text size="xs" c="dark.3">
 						{item.description}
 					</Text>
 				</div>
@@ -143,7 +143,7 @@ export function HeaderMegaMenu() {
 												<Text fw={500} fz="sm">
 													Get started
 												</Text>
-												<Text size="xs" c="dimmed">
+												<Text size="xs" c="dark.3">
 													Their food sources have decreased, and their numbers
 												</Text>
 											</div>
