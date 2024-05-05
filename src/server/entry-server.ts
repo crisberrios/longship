@@ -67,6 +67,7 @@ async function startServer() {
 		eventHandler(async (event) => {
 			const pageContextInit = {
 				urlOriginal: event.node.req.originalUrl || event.node.req.url!,
+				userAgent: event.node.req.headers["user-agent"],
 			};
 			const pageContext = await renderPage(pageContextInit);
 			const response = pageContext.httpResponse;
