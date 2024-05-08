@@ -5,7 +5,7 @@ import compression from "vite-plugin-compression2";
 const config = {
 	plugins: [
 		vike({
-			disableAutoFullBuild: true,
+			disableAutoFullBuild: false,
 			prerender: true,
 		}),
 		compression({ algorithm: "brotliCompress" }),
