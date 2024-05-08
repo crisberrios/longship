@@ -21,6 +21,9 @@ async function data(pageContext: VikeContext): Promise<IsomorphicExampleData> {
 	const catNamePromise = fetch(`${baseUrl}/api/cat-name`).then(
 		(res: Response) => res.text(),
 	);
+	//Note that in this example we use a local API running alongside Vike. For SSG, our API may not be
+	//running, so we need to configure our conditional URLS in config when building.
+	//const catNamePromise = new Promise<string>((resolve) => resolve("Fluffy"));
 
 	return {
 		catFacts: pageContext.isClientSideNavigation
