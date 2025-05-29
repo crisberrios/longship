@@ -1,6 +1,32 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"organizeImports": { "enabled": true },
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"ignore": ["**/*.css"],
+		"attributePosition": "auto",
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 80,
+		"lineEnding": "lf"
+	},
+	"javascript": {
+		"formatter": {
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"semicolons": "always",
+			"trailingCommas": "all"
+		}
+	},
+	"json": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	},
 	"css": {
 		"linter": {
 			"enabled": false
@@ -88,7 +114,6 @@
 			"**/vitest.setup.mjs"
 		]
 	},
-	"javascript": { "globals": [] },
 	"overrides": [
 		{
 			"include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
