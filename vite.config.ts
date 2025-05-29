@@ -1,13 +1,11 @@
 import vike from "vike/plugin";
 import react from "@vitejs/plugin-react-swc";
 import compression from "vite-plugin-compression2";
+import { preserveShebangs } from "rollup-plugin-preserve-shebangs";
 
 const config = {
 	plugins: [
-		vike({
-			disableAutoFullBuild: false,
-			prerender: true,
-		}),
+		vike(),
 		compression({ algorithm: "brotliCompress" }),
 		react(),
 		{
@@ -25,6 +23,7 @@ const config = {
 				};
 			},
 		},
+		preserveShebangs(),
 	],
 };
 
