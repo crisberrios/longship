@@ -10,7 +10,7 @@
 		"format:fix": "biome format . --write",
 		"lint": "biome lint . && stylelint \"src/**/*.{css,scss,pcss}\"",
 		"lint:fix": "biome lint . --write && stylelint \"src/**/*.{css,scss,pcss}\" --fix",
-		"test": "vitest"
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"@mantine/core": "^8.0.2",
